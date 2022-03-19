@@ -53,10 +53,7 @@ describe("Securuty page tests", () => {
     await page.setDefaultTimeout(5000);
     const h1 = "div div div h1";
     const h1Text = await page.$eval(h1, elem => elem.textContent);
-    const h1Part1 = await h1Text.slice(0,15);
-    const h1Part2 = await h1Text.slice(16);
-    const h1Full = [h1Part1, h1Part2].join(" ");
-    expect(h1Full).toEqual("Secure at every step");
+    expect(h1Text).toEqual("Secure at every step");
   });
 
   test("h4Span text test", async () => {
