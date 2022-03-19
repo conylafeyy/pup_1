@@ -1,14 +1,15 @@
 let page;
 
-afterEach(() => {
-  page.close();
-});
 
 describe("Github page tests", () => {
   
-  beforeEach(async () => {
+beforeEach(async () => {
   page = await browser.newPage();
   await page.goto("https://github.com/team");
+});
+
+afterEach(() => {
+  page.close();
 });
 
   test("The h1 header content'", async () => {
@@ -43,10 +44,14 @@ describe("Securuty page tests", () => {
     page = await browser.newPage();
     await page.goto("https://github.com/features/security");
   });
+
+  afterEach(() => {
+    page.close();
+  });
   
   test("h1 text test", async () => {
     await page.setDefaultTimeout(5000);
-    const h1 = await "div div div h1";
+    const h1 = "div div div h1";
     const h1Text = await page.$eval(h1, elem => elem.textContent);
     const h1Part1 = await h1Text.slice(0,15);
     const h1Part2 = await h1Text.slice(16);
@@ -55,13 +60,15 @@ describe("Securuty page tests", () => {
   });
 
   test("h4Span text test", async () => {
-    const h4Span = await "div div div h4 span";
+    await page.setDefaultTimeout(5000);
+    const h4Span = "div div div h4 span";
     const h4SpanText = await page.$eval(h4Span, elem => elem.textContent);
     expect(h4SpanText).toEqual("Ship secure applications within the GitHub flow");
   });
 
   test("Button text test", async () => {
-    const headerEl = await "div main div div a";
+    await page.setDefaultTimeout(5000);
+    const headerEl = "div main div div a";
     const elementText = await page.$eval(headerEl, elem => elem.textContent);
     expect(elementText).toEqual("Security");
  });
